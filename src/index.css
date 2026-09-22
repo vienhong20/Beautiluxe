@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* ── BeautiLuxe tokens (fixed palette — only these colors) ── */
+@theme {
+  --color-jade: #0b5e59;
+  --color-foam: #f6fbfa;
+  --color-seaglass: #e2f1ee;
+  --color-ink: #0f2b2c;
+  --color-coral: #f07c6c;
+  --color-gold: #e2c47f;
+  --color-muted: #4f6b6a;
+
+  --font-display: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-card: 20px;
+  --shadow-ambient: 0 12px 32px -18px rgb(15 43 44 / 0.28);
+
+  /* layout switches to desktop above 960px */
+  --breakpoint-lg: 60rem;
+  --breakpoint-xl: 80rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 104px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-foam font-sans text-ink antialiased;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  @media (min-width: 60rem) {
+    body { font-size: 18px; }
+  }
+  h1, h2, h3 {
+    @apply font-display font-semibold;
+    line-height: 1.1;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-jade);
+    outline-offset: 3px;
+  }
+  .on-dark :focus-visible { outline-color: var(--color-gold); }
+}
+
+@layer components {
+  /* Numbers: prices, hours, phone */
+  .num {
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    font-size: max(18px, 1em);
+  }
+  .tagline {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-style: italic;
+  }
+  .section-pad { @apply px-4 py-16 sm:px-6 lg:px-12 lg:py-24; }
+  .container-x { @apply mx-auto w-full max-w-[1440px]; }
+
+  /* Gel-polish sheen: soft white 45° sweep over 0.6s */
+  .sheen { position: relative; overflow: hidden; isolation: isolate; }
+  .sheen::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(45deg, transparent 38%, rgb(255 255 255 / 0.35) 50%, transparent 62%);
+    transform: translateX(-120%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .sheen:hover::after,
+  .sheen-group:hover .sheen::after,
+  .sheen:focus-visible::after { transform: translateX(120%); }
+
+  /* Almond / nail-tip silhouette */
+  .almond-mask {
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M50 0C77 11 100 36 100 64C100 86 80 100 50 100C20 100 0 86 0 64C0 36 23 11 50 0Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M50 0C77 11 100 36 100 64C100 86 80 100 50 100C20 100 0 86 0 64C0 36 23 11 50 0Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Gentle fade-in on scroll — content is visible at rest; scroll-driven where supported */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sheen::after { transition: none; }
+}
