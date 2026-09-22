@@ -1,19 +1,24 @@
-import { Phone } from 'lucide-react';
+import { ArrowRight, DoorOpen, Phone, Star } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import Button from '../components/core/Button.jsx';
-import PhotoFrame from '../components/media/PhotoFrame.jsx';
-import CoralDrop from '../components/media/CoralDrop.jsx';
+import RotatingBadge from '../components/media/RotatingBadge.jsx';
+import HeroPhotoCarousel from '../components/carousel/HeroPhotoCarousel.jsx';
 import useOpenStatus from '../hooks/useOpenStatus.js';
-import { HERO_PHOTOS } from '../data/gallery.js';
+import { HERO_INTERIOR_PHOTOS } from '../data/gallery.js';
 import { BUSINESS, BOOKING_URL, HAS_BOOKING } from '../data/business.js';
+
+const DOT_PATTERN = {
+  backgroundImage: 'radial-gradient(currentColor 1.5px, transparent 1.5px)',
+  backgroundSize: '14px 14px',
+};
 
 export default function Hero() {
   const { isOpen, label } = useOpenStatus();
   const reduce = useReducedMotion();
 
   return (
-    <section id="top" className="px-4 pb-16 pt-8 sm:px-6 lg:px-12 lg:pb-24 lg:pt-14">
-      <div className="container-x grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+    <section id="top" className="overflow-x-hidden px-4 pb-10 pt-8 sm:px-6 lg:px-12 lg:pb-16 lg:pt-14">
+      <div className="container-x grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
         <motion.div
           className="flex flex-col items-start gap-6"
           initial={reduce ? false : { opacity: 0, y: 16 }}
@@ -31,7 +36,7 @@ export default function Hero() {
           <h1 className="text-[44px] text-ink sm:text-[58px] lg:text-[68px] xl:text-[76px]">
             Fresh nails.
             <br />
-            <span className="text-jade">Zero fuss.</span>
+            <span className="text-gold-deep">Zero fuss.</span>
           </h1>
 
           <p className="max-w-[32rem] text-[18px] text-muted lg:text-[20px]">
@@ -39,37 +44,68 @@ export default function Hero() {
             online, or call anytime.
           </p>
 
-          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Button href={BOOKING_URL} external={HAS_BOOKING} className="w-full px-8 sm:w-auto">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-1">
+            <Button href={BOOKING_URL} external={HAS_BOOKING} className="px-8">
               Book Now
+              <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
             </Button>
-            <Button href={BUSINESS.phoneHref} variant="ghost" className="w-full sm:w-auto">
-              <Phone size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span className="num">Call {BUSINESS.phoneDisplay}</span>
-            </Button>
+            <a
+              href={BUSINESS.phoneHref}
+              className="num inline-flex items-center gap-2 font-medium text-jade underline decoration-jade/30 underline-offset-8 hover:decoration-jade"
+            >
+              <Phone size={16} strokeWidth={1.75} aria-hidden="true" />
+              Call {BUSINESS.phoneDisplay}
+            </a>
           </div>
         </motion.div>
 
         <motion.div
-          className="relative mx-auto w-full max-w-[520px] pb-[12%] lg:max-w-[600px]"
+          className="relative mx-auto w-full max-w-[420px] lg:max-w-none"
           initial={reduce ? false : { opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         >
-          <PhotoFrame
-            src={HERO_PHOTOS.main.src}
-            alt={HERO_PHOTOS.main.alt}
-            priority
-            className="ml-auto w-[72%]"
+          {/* Soft organic wash behind the photo, standing in for the
+              reference's leaf motif with something that fits a nail brand. */}
+          <div
+            className="absolute -inset-6 -z-10 rounded-[40%] bg-seaglass blur-2xl sm:-inset-10"
+            aria-hidden="true"
           />
-          <PhotoFrame
-            src={HERO_PHOTOS.accent.src}
-            alt={HERO_PHOTOS.accent.alt}
-            priority
-            halo
-            className="absolute bottom-0 left-0 w-[42%]"
+          <div
+            className="absolute -left-5 -top-5 -z-10 hidden h-28 w-28 text-jade/15 sm:block"
+            style={DOT_PATTERN}
+            aria-hidden="true"
           />
-          <CoralDrop className="absolute left-[14%] top-[10%] h-9 w-6" />
+
+          <HeroPhotoCarousel
+            items={HERO_INTERIOR_PHOTOS}
+            className="aspect-[3/4] w-full rounded-[32px] shadow-[var(--shadow-ambient)]"
+          />
+
+          <div className="absolute -right-3 -top-5 sm:-right-5 sm:-top-7">
+            <RotatingBadge href={BOOKING_URL} external={HAS_BOOKING} />
+          </div>
+
+          <div className="absolute -left-4 top-[20%] hidden items-center gap-3 rounded-2xl bg-foam py-3 pl-3 pr-4 shadow-[var(--shadow-ambient)] sm:flex">
+            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-jade text-foam">
+              <Star size={16} strokeWidth={1.5} fill="currentColor" aria-hidden="true" />
+            </span>
+            <span className="leading-tight">
+              <span className="num block text-[15px] font-semibold text-ink">{BUSINESS.google.rating} rated</span>
+              <span className="block text-[12px] text-muted">on Google</span>
+            </span>
+          </div>
+
+          <div className="absolute -bottom-4 right-[8%] flex items-center gap-3 rounded-2xl bg-foam py-3 pl-3 pr-4 shadow-[var(--shadow-ambient)] sm:right-[12%]">
+            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-coral text-ink">
+              <DoorOpen size={16} strokeWidth={1.5} aria-hidden="true" />
+            </span>
+            <span className="text-[13px] font-medium leading-tight text-ink">
+              Walk-ins
+              <br />
+              welcome
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>

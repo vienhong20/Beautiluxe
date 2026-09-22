@@ -59,7 +59,7 @@
     outline: 2px solid var(--color-jade);
     outline-offset: 3px;
   }
-  .on-dark :focus-visible { outline-color: var(--color-gold-soft); }
+  .on-dark :focus-visible { outline-color: var(--color-gold); }
 }
 
 @layer components {
@@ -110,9 +110,21 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Continuous horizontal scroll: track holds the content twice back to
+     back, and slides exactly one copy's width so the loop is seamless. */
+  .marquee-track {
+    animation: marquee-scroll 26s linear infinite;
+  }
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .sheen::after { transition: none; }
+  .marquee-track { animation: none; }
 }

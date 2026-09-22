@@ -10,16 +10,34 @@ import tortoise from '../assets/photos/tortoise-polka.webp';
 import ghost from '../assets/photos/ghost-3d-art.webp';
 import pinkOmbre from '../assets/photos/pink-ombre-glitter.webp';
 import redFloral from '../assets/photos/red-floral-coffin.webp';
+import interiorAisle from '../assets/photos/hero-salon-interior.webp';
+import interiorReception from '../assets/photos/hero-salon-interior-1.webp';
 
-// Real client work from the salon's current website gallery.
-export const HERO_PHOTOS = {
-  main: { src: goldFlorals, alt: 'Almond nails with gold chrome tips and hand-painted white florals' },
-  accent: { src: redHearts, alt: 'Red glitter almond nails with heart french accents' },
-};
+// The salon's own interior, for the Hero's auto-crossfading photo. Add more
+// entries here as more real interior shots come in — HeroPhotoCarousel
+// (and its dot indicator) work for any count.
+export const HERO_INTERIOR_PHOTOS = [
+  { src: interiorAisle, alt: 'BeautiLuxe Nail Spa manicure stations, viewed down the center aisle' },
+  { src: interiorReception, alt: 'BeautiLuxe Nail Spa reception desk and polish display wall' },
+];
 
 // title/subtitle are short captions derived from each photo's own alt text
-// (not separate invented copy) — used by the Gallery carousel's text overlay.
+// (not separate invented copy) — used by the Gallery and Hero carousels'
+// text captions. Every real client photo the salon has lives in this one
+// list now (previously two of them were reserved for a Hero-only layout).
 export const GALLERY = [
+  {
+    src: goldFlorals,
+    alt: 'Almond nails with gold chrome tips and hand-painted white florals',
+    title: 'Gold Chrome Blooms',
+    subtitle: 'Gold chrome tips, hand-painted white florals',
+  },
+  {
+    src: redHearts,
+    alt: 'Red glitter almond nails with heart french accents',
+    title: 'Red Glitter Hearts',
+    subtitle: 'Heart french accents, red glitter',
+  },
   {
     src: silver,
     alt: 'Nude almond nails with silver glitter fade and gems',

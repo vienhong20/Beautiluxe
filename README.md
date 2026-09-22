@@ -22,15 +22,18 @@ npm run build    # outputs dist/
 | Address, phone, hours, socials, Google rating, drinks | `src/data/business.js` |
 | Service menu + signature services | `src/data/services.js` |
 | Google reviews (verbatim, with reviewer photos where we have one) | `src/data/reviews.js` + `src/assets/reviewers/` |
-| Gallery + hero photos | `src/data/gallery.js` + `src/assets/photos/` |
+| Gallery photos (Our Work carousel + reused by a few Signature cards) | `src/data/gallery.js` + `src/assets/photos/` |
+| Hero photos (auto-crossfading) | `data/gallery.js`'s `HERO_INTERIOR_PHOTOS` + `src/assets/photos/hero-salon-interior*.webp` |
 | Colors, fonts, radius, sheen | `src/index.css` |
 | SEO meta + NailSalon JSON-LD | `index.html` |
 
 ## Components
 
 - `components/core` — `Button` (primary / secondary / ghost / coral / light / outlineLight), `Badge`
-- `components/media` — `PhotoFrame` (signature rounded-rect crop + 1.5px jade/gold hairline), `CoralDrop`, `InitialAvatar` (monogram fallback for reviewers we don't have a photo on file for)
-- `components/carousel` — `SignatureShowcase` (5-slot 3D coverflow for the Signatures section — mouse-parallax tilt, contained cinematic blur backdrop, staggered badge/title/tagline reveal; the long description sits below the dark showcase in the page's own light theme, not overlaid on the photo. Hardcoded for exactly 5 signature services — see the file-level comment in `SignatureShowcase.jsx` before adding/removing one. See `SignatureShowcase.css`); `GalleryCarousel` (hover/tap-to-expand filmstrip for Our Work — all 10 photos stay on screen, width and color driven by each item's distance from the active one, gradient title/caption reveal on the active card, auto-advances every 3.2s. Works for any item count — see `GalleryCarousel.css`)
+- `components/media` — `PhotoFrame` (signature rounded-rect crop + 1.5px jade/gold hairline), `CoralDrop`, `InitialAvatar` (monogram fallback for reviewers we don't have a photo on file for), `RotatingBadge` (slow-spinning circular "Book Now" stamp on the Hero photo — SVG `textPath` so the label stays legible at any rotation angle, paused under `prefers-reduced-motion`)
+- `components/carousel` — `SignatureShowcase` (5-slot 3D coverflow for the Signatures section — mouse-parallax tilt, contained cinematic blur backdrop, staggered badge/title/tagline reveal; the long description sits below the dark showcase in the page's own light theme, not overlaid on the photo. Hardcoded for exactly 5 signature services — see the file-level comment in `SignatureShowcase.jsx` before adding/removing one. See `SignatureShowcase.css`); `GalleryCarousel` (hover/tap-to-expand filmstrip for Our Work — every gallery photo stays on screen, width and color driven by each item's distance from the active one, gradient title/caption reveal on the active card, auto-advances every 3.2s. Works for any item count — see `GalleryCarousel.css`)
+- `sections/MarqueeStrip` — continuous auto-scrolling ribbon of the salon's real service categories (from `SERVICE_MENU`), directly under the Hero. Disabled under `prefers-reduced-motion` (see `.marquee-track` in `index.css`)
+- `components/carousel/HeroPhotoCarousel` — quiet auto-crossfade for the Hero photo (no manual controls, just a small dot indicator), 5s per slide, pauses on hover/focus, holds on the first photo under `prefers-reduced-motion`. Works for any number of photos in `HERO_INTERIOR_PHOTOS`
 - `components/feedback` — `RatingStars` (Foil Gold, dark surfaces only)
 - `components/navigation` — `Header`, `StickyBookBar` (mobile only)
 - `hooks/useOpenStatus` — live "Open now / Opens at" in salon time (America/New_York)
@@ -44,3 +47,5 @@ npm run build    # outputs dist/
 - Reviews are real 5-star Google reviews quoted verbatim (trimmed excerpts marked with …), sourced from the salon's own Google Business Profile. The four most recent don't have a photo on file, so they show an initials monogram instead of scraping a reviewer's personal photo. Rating 4.8 / 1,085 reviews as of Sep 2026 — update `BUSINESS.google` periodically. The Reviews strip auto-advances every 4.5s (pauses on hover/focus, disabled under `prefers-reduced-motion`).
 - No prices are published (matches current site). Swap in real prices in `services.js` when available.
 - Each gallery photo's `title`/`subtitle` (in `data/gallery.js`) is a short caption derived from its own `alt` text, not separate copy — edit both together if a photo's description changes.
+- The Hero photo is now the salon's own real interior (two shots so far: the manicure-station aisle, and reception — both show the actual BeautiLuxe signage/branding on the wall), auto-crossfading via `HeroPhotoCarousel`. This replaced an earlier placeholder Unsplash stock photo that was only ever meant to be temporary; every image on the page is the salon's own now. Add a third (and beyond) by pushing another `{ src, alt }` onto `HERO_INTERIOR_PHOTOS` — no other code changes needed. Source PNGs (3-4MB each, not committed) were converted to ~1100px-wide webp at q82 (~160-220KB) before adding.
+- The Hero is a light 2-column layout (headline/CTA left, photo right with floating "4.8 rated" / "Walk-ins welcome" badges and a spinning "Book Now" stamp) — the page's dark "moments" are Signatures and Reviews.
