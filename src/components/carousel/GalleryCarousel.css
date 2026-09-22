@@ -1,0 +1,155 @@
+/*
+  Hover-expand filmstrip carousel, adapted from a reference "team carousel"
+  concept: non-active items compress to slivers, the active item expands to
+  full width with a gradient text reveal. Re-colored to the BeautiLuxe jade
+  and gold palette (the reference used neon green/cyan) and re-sized for an
+  embedded gallery section rather than a full-viewport hero.
+*/
+
+.gallery-carousel {
+  --item-height: clamp(300px, 42vw, 480px);
+  --active-width: clamp(220px, 34vw, 400px);
+  --near-width: clamp(56px, 7vw, 96px);
+  --transition: 550ms cubic-bezier(0.55, 0.24, 0.18, 1);
+}
+
+.gallery-carousel__list {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 4px 4px 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.gallery-carousel__list::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-carousel__item {
+  position: relative;
+  flex: 1 1 20px;
+  min-width: 20px;
+  height: var(--item-height);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  cursor: pointer;
+  isolation: isolate;
+  transition: flex-basis var(--transition), flex-grow var(--transition);
+}
+
+.gallery-carousel__item[data-dist='1'] {
+  flex: 0 0 var(--near-width);
+}
+
+.gallery-carousel__item[data-active] {
+  flex: 0 0 var(--active-width);
+}
+
+.gallery-carousel__item:hover:not([data-active]) {
+  flex: 0 0 clamp(120px, 16vw, 180px);
+}
+
+.gallery-carousel__item:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.gallery-carousel__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.5) brightness(0.68);
+  transition: filter var(--transition), transform var(--transition);
+}
+
+.gallery-carousel__item[data-active] .gallery-carousel__img {
+  filter: saturate(1) brightness(0.92);
+}
+
+.gallery-carousel__item:hover .gallery-carousel__img {
+  transform: scale(1.04);
+}
+
+.gallery-carousel__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgb(7 62 59 / 0.92) 0%, rgb(7 62 59 / 0.5) 42%, transparent 72%);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.gallery-carousel__item[data-active] .gallery-carousel__scrim {
+  opacity: 1;
+}
+
+.gallery-carousel__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gallery-carousel__title,
+.gallery-carousel__subtitle {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: var(--transition);
+  transition-property: opacity, transform;
+  white-space: nowrap;
+}
+
+.gallery-carousel__item[data-active] .gallery-carousel__title,
+.gallery-carousel__item[data-active] .gallery-carousel__subtitle {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.gallery-carousel__item[data-active] .gallery-carousel__title {
+  transition-delay: 120ms;
+}
+
+.gallery-carousel__item[data-active] .gallery-carousel__subtitle {
+  transition-delay: 60ms;
+}
+
+.gallery-carousel__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(19px, 2vw, 24px);
+  color: var(--color-foam);
+  line-height: 1.15;
+}
+
+.gallery-carousel__subtitle {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-gold);
+}
+
+@media (max-width: 639px) {
+  .gallery-carousel__title,
+  .gallery-carousel__subtitle {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-carousel__item,
+  .gallery-carousel__img,
+  .gallery-carousel__scrim,
+  .gallery-carousel__title,
+  .gallery-carousel__subtitle {
+    transition-duration: 1ms !important;
+  }
+}
