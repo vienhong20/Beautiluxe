@@ -1,8 +1,10 @@
 import { useId, useRef, useState } from 'react';
 import { Phone } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import Badge from '../components/core/Badge.jsx';
 import Button from '../components/core/Button.jsx';
 import CoralDrop from '../components/media/CoralDrop.jsx';
+import Reveal from '../components/motion/Reveal.jsx';
 import { SERVICE_MENU } from '../data/services.js';
 import { BUSINESS, BOOKING_URL, HAS_BOOKING } from '../data/business.js';
 
@@ -12,6 +14,7 @@ export default function ServiceMenu() {
   const [active, setActive] = useState(SERVICE_MENU[0].id);
   const tabRefs = useRef([]);
   const baseId = useId();
+  const reduce = useReducedMotion();
   const current = SERVICE_MENU.find((c) => c.id === active);
 
   const onKeyDown = (event, index) => {
@@ -26,9 +29,9 @@ export default function ServiceMenu() {
   return (
     <section id="menu" className="section-pad bg-seaglass">
       <div className="container-x">
-        <div className="reveal mb-8 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+        <Reveal className="mb-8 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex max-w-2xl flex-col gap-4">
-            <h2 className="flex items-center gap-3 text-[34px] lg:text-[48px]">
+            <h2 className="flex items-center gap-3 text-[32px] lg:text-[46px]">
               <CoralDrop className="h-7 w-5" />
               The menu
             </h2>
@@ -40,7 +43,7 @@ export default function ServiceMenu() {
             <Phone size={18} strokeWidth={1.5} aria-hidden="true" />
             <span className="num">Call for pricing · {BUSINESS.phoneDisplay}</span>
           </a>
-        </div>
+        </Reveal>
 
         <div
           role="tablist"
@@ -61,7 +64,7 @@ export default function ServiceMenu() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(cat.id)}
                 onKeyDown={(e) => onKeyDown(e, index)}
-                className={`inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full px-5 text-[17px] font-medium transition-colors ${
+                className={`inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full px-5 text-[16px] font-medium transition-colors ${
                   selected ? 'bg-jade text-foam' : 'bg-foam text-ink hover:text-jade'
                 }`}
               >
@@ -76,27 +79,38 @@ export default function ServiceMenu() {
           id={`${baseId}-panel`}
           role="tabpanel"
           aria-labelledby={`${baseId}-tab-${active}`}
-          className="rounded-[var(--radius-card)] bg-foam p-6 shadow-[var(--shadow-ambient)] sm:p-8 lg:p-10"
+          className="overflow-hidden rounded-[var(--radius-card)] bg-foam shadow-[var(--shadow-ambient)]"
         >
-          <ul className="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-            {current.items.map(normalize).map((item) => (
-              <li
-                key={item.name}
-                className="flex min-h-14 items-center justify-between gap-3 border-b border-jade/10 py-3"
+          <div className="p-6 sm:p-8 lg:p-10">
+            <AnimatePresence mode="wait">
+              <motion.ul
+                key={active}
+                className="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3"
+                initial={reduce ? false : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? undefined : { opacity: 0, y: -8 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className="flex items-center gap-3">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-jade" aria-hidden="true" />
-                  <span className="font-medium text-ink">{item.name}</span>
-                </span>
-                {item.signature && <Badge>Signature</Badge>}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-muted">Not sure what to pick? We&apos;ll help you choose.</p>
-            <Button href={BOOKING_URL} external={HAS_BOOKING} className="w-full sm:w-auto">
-              Book Now
-            </Button>
+                {current.items.map(normalize).map((item) => (
+                  <li
+                    key={item.name}
+                    className="flex min-h-14 items-center justify-between gap-3 border-b border-jade/10 py-3"
+                  >
+                    <span className="flex items-center gap-3">
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-jade" aria-hidden="true" />
+                      <span className="font-medium text-ink">{item.name}</span>
+                    </span>
+                    {item.signature && <Badge>Signature</Badge>}
+                  </li>
+                ))}
+              </motion.ul>
+            </AnimatePresence>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-muted">Not sure what to pick? We&apos;ll help you choose.</p>
+              <Button href={BOOKING_URL} external={HAS_BOOKING} className="w-full sm:w-auto">
+                Book Now
+              </Button>
+            </div>
           </div>
         </div>
       </div>

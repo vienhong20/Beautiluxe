@@ -13,7 +13,7 @@ export default function StickyBookBar() {
           href={BUSINESS.phoneHref}
           className="sheen inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-seaglass font-medium text-jade ring-1 ring-inset ring-jade/15"
         >
-          <Phone size={20} strokeWidth={1.5} aria-hidden="true" />
+          <Phone size={19} strokeWidth={1.5} aria-hidden="true" />
           Call Us
         </a>
         <a
@@ -21,7 +21,7 @@ export default function StickyBookBar() {
           {...(HAS_BOOKING ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           className="sheen inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-jade font-medium text-foam"
         >
-          <CalendarCheck size={20} strokeWidth={1.5} aria-hidden="true" />
+          <CalendarCheck size={19} strokeWidth={1.5} aria-hidden="true" />
           Book Now
         </a>
       </div>

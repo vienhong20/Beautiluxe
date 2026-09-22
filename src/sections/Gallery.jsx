@@ -1,41 +1,58 @@
 import { Instagram } from 'lucide-react';
-import AlmondFrame from '../components/media/AlmondFrame.jsx';
 import Button from '../components/core/Button.jsx';
 import CoralDrop from '../components/media/CoralDrop.jsx';
+import Reveal from '../components/motion/Reveal.jsx';
 import { GALLERY } from '../data/gallery.js';
 import { BUSINESS } from '../data/business.js';
+
+// Cycle of cell sizes for the bento grid — repeats every 5 items so the
+// rhythm stays legible. `grid-auto-flow: dense` backfills any gaps.
+const SPANS = [
+  'col-span-2 row-span-2',
+  'col-span-1 row-span-1',
+  'col-span-1 row-span-1',
+  'col-span-1 row-span-2',
+  'col-span-2 row-span-1',
+];
 
 export default function Gallery() {
   return (
     <section id="work" className="section-pad overflow-hidden">
       <div className="container-x">
-        <div className="reveal mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
+        <Reveal className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex max-w-2xl flex-col gap-4">
-            <h2 className="flex items-center gap-3 text-[34px] lg:text-[48px]">
+            <h2 className="flex items-center gap-3 text-[32px] lg:text-[46px]">
               <CoralDrop className="h-7 w-5" />
               Fresh from our chairs
             </h2>
-            <p className="text-muted">Real sets by our team. Swipe through, then show us your favorite.</p>
+            <p className="text-muted">Real sets by our team. Tap through, then show us your favorite.</p>
           </div>
           <Button href={BUSINESS.instagram.url} external variant="ghost" className="self-start lg:self-auto">
             <Instagram size={18} strokeWidth={1.5} aria-hidden="true" />
             {BUSINESS.instagram.handle}
           </Button>
-        </div>
+        </Reveal>
 
-        <ul
-          className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-x-8 lg:gap-y-10 lg:overflow-visible lg:px-0"
+        <div
+          className="grid auto-rows-[120px] grid-cols-2 grid-flow-row-dense gap-3 sm:auto-rows-[160px] sm:gap-4 lg:grid-cols-4 lg:auto-rows-[200px] lg:gap-5"
           aria-label="Nail art gallery"
         >
           {GALLERY.map((photo, i) => (
-            <li
+            <Reveal
               key={photo.alt}
-              className={`w-[56%] shrink-0 snap-center sm:w-[34%] lg:w-auto ${i % 2 === 1 ? 'lg:translate-y-10' : ''}`}
+              delay={Math.min(i * 0.04, 0.3)}
+              className={`sheen-group relative overflow-hidden rounded-[var(--radius-card)] bg-seaglass ${SPANS[i % SPANS.length]}`}
             >
-              <AlmondFrame src={photo.src} alt={photo.alt} />
-            </li>
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+                className="sheen absolute inset-0 h-full w-full object-cover"
+              />
+            </Reveal>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

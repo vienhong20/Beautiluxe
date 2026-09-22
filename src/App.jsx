@@ -1,6 +1,7 @@
 import Header from './components/navigation/Header.jsx';
 import StickyBookBar from './components/navigation/StickyBookBar.jsx';
 import Hero from './sections/Hero.jsx';
+import TrustBar from './sections/TrustBar.jsx';
 import Signatures from './sections/Signatures.jsx';
 import ServiceMenu from './sections/ServiceMenu.jsx';
 import Gallery from './sections/Gallery.jsx';
@@ -21,6 +22,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <TrustBar />
         <Signatures />
         <ServiceMenu />
         <Gallery />

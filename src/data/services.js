@@ -102,4 +102,14 @@ export const SIGNATURES = [
     tagline: 'Soft, smooth skin.',
     body: 'A warm paraffin treatment with milk and honey. Add it to your pedicure.',
   },
+  {
+    title: 'Eyelash Extensions',
+    tagline: 'Wide eyed, all day.',
+    body: 'Classic or hybrid lash sets, applied by our lash artists. Ask about the lash lift too.',
+  },
+  {
+    title: 'Ombre Full Set',
+    tagline: 'Fade it out.',
+    body: 'A smooth color gradient from base to tip, done in acrylic or dip. Endless color combinations.',
+  },
 ];

@@ -71,4 +71,28 @@ export const REVIEWS = [
     date: 'Feb 2026',
     text: 'Frank is an excellent nail technician. He is a very good listener. He has always done my pedicures. He also has been doing my manicures for years. His work is outstanding. He’s also a great technician when designing nails.',
   },
+  {
+    name: 'Diana Abadir',
+    photo: null,
+    date: 'Jun 2026',
+    text: 'Today was my first time visiting this nail salon, and I had a wonderful experience! The place was very clean, beautiful, and welcoming. The technician who did my nails was professional, kind, and took his time to get every detail right. …',
+  },
+  {
+    name: 'Grace Lozano Lozada',
+    photo: null,
+    date: 'Jan 2026',
+    text: 'I will continuously go to Boo for my nails. He’s such a great artist and has never let me down. Highly recommend! I get so many compliments on my nails, thanks to Boo!',
+  },
+  {
+    name: 'Mazi Monshi',
+    photo: null,
+    date: 'Jun 2026',
+    text: 'I called in to make an appointment and spoke with Victor, who was very helpful on the phone. I brought my eight year old daughter for both of us to have pedicures and manicures. Vivian took great care of us the whole visit. Five stars, we will come back. …',
+  },
+  {
+    name: 'Hulya Yalcin',
+    photo: null,
+    date: 'Jun 2026',
+    text: 'Absolutely love my nails! Nari did an amazing job. She is talented, professional, and very detail-oriented. The results exceeded my expectations. Highly recommend!',
+  },
 ];
