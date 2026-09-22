@@ -1,10 +1,11 @@
 import { Facebook, Instagram, MapPin, Navigation, Phone } from 'lucide-react';
 import Button from '../components/core/Button.jsx';
 import CoralDrop from '../components/media/CoralDrop.jsx';
+import TikTokIcon from '../components/media/TikTokIcon.jsx';
 import Reveal from '../components/motion/Reveal.jsx';
 import useOpenStatus from '../hooks/useOpenStatus.js';
 import mapLocation from '../assets/photos/map-location-1.webp';
-import { BUSINESS, BOOKING_URL, HAS_BOOKING, HOURS, formatTime } from '../data/business.js';
+import { BUSINESS, HOURS, formatTime } from '../data/business.js';
 
 // Display Monday-first, keep HOURS indexed Sunday-first for Date math.
 const WEEK = [1, 2, 3, 4, 5, 6, 0];
@@ -97,11 +98,17 @@ export default function Visit() {
               >
                 <Facebook size={22} strokeWidth={1.5} aria-hidden="true" />
               </a>
+              <a
+                href={BUSINESS.tiktok.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full text-jade hover:bg-seaglass"
+                aria-label="BeautiLuxe Nail Spa on TikTok"
+              >
+                <TikTokIcon className="h-[22px] w-[22px]" />
+              </a>
             </div>
-            <div className="mt-auto flex flex-col gap-3 pt-2 sm:flex-row">
-              <Button href={BOOKING_URL} external={HAS_BOOKING} className="w-full sm:w-auto">
-                Book Now
-              </Button>
+            <div className="mt-auto pt-2">
               <Button href={BUSINESS.directionsUrl} external variant="ghost" className="w-full sm:w-auto">
                 <Navigation size={18} strokeWidth={1.5} aria-hidden="true" />
                 Get Directions

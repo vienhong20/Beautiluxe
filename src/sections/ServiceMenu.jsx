@@ -2,11 +2,10 @@ import { useId, useRef, useState } from 'react';
 import { Phone } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import Badge from '../components/core/Badge.jsx';
-import Button from '../components/core/Button.jsx';
 import CoralDrop from '../components/media/CoralDrop.jsx';
 import Reveal from '../components/motion/Reveal.jsx';
 import { SERVICE_MENU } from '../data/services.js';
-import { BUSINESS, BOOKING_URL, HAS_BOOKING } from '../data/business.js';
+import { BUSINESS } from '../data/business.js';
 
 const normalize = (item) => (typeof item === 'string' ? { name: item } : item);
 
@@ -105,12 +104,7 @@ export default function ServiceMenu() {
                 ))}
               </motion.ul>
             </AnimatePresence>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-muted">Not sure what to pick? We&apos;ll help you choose.</p>
-              <Button href={BOOKING_URL} external={HAS_BOOKING} className="w-full sm:w-auto">
-                Book Now
-              </Button>
-            </div>
+            <p className="mt-8 text-muted">Not sure what to pick? We&apos;ll help you choose.</p>
           </div>
         </div>
       </div>

@@ -4,8 +4,9 @@ export const BUSINESS = {
   cityLine: 'Boca Raton, FL 33434',
   phoneDisplay: '561-465-5948',
   phoneHref: 'tel:5614655948',
-  instagram: { handle: '@beautiluxenailspa', url: 'https://www.instagram.com/beautiluxenailspa' },
-  facebook: 'https://www.facebook.com/profile.php?id=100090760867621',
+  instagram: { handle: '@beautiluxenailspa', url: 'https://www.instagram.com/beautiluxenailspa/' },
+  facebook: 'https://www.facebook.com/people/Beautiluxe-nail-spa/100090760867621/',
+  tiktok: { handle: '@beautiluxenailspa', url: 'https://www.tiktok.com/@beautiluxenailspa' },
   mapsUrl:
     'https://www.google.com/maps/search/?api=1&query=BeautiLuxe%20Nail%20Spa&query_place_id=ChIJm6ZCcOIb2YgRlyuoNVAGzKE',
   directionsUrl:

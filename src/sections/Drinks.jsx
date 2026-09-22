@@ -1,7 +1,6 @@
-import Button from '../components/core/Button.jsx';
 import CoralDrop from '../components/media/CoralDrop.jsx';
 import Reveal from '../components/motion/Reveal.jsx';
-import { DRINKS, BOOKING_URL, HAS_BOOKING } from '../data/business.js';
+import { DRINKS } from '../data/business.js';
 
 export default function Drinks() {
   return (
@@ -16,9 +15,6 @@ export default function Drinks() {
           <p className="max-w-[32rem] text-muted">
             Pick something from the bar while you settle in. One complimentary drink per guest, every visit.
           </p>
-          <Button href={BOOKING_URL} external={HAS_BOOKING}>
-            Book Now
-          </Button>
         </Reveal>
 
         <Reveal delay={0.1} className="rounded-[var(--radius-card)] bg-seaglass p-6 shadow-[var(--shadow-soft)] sm:p-10">

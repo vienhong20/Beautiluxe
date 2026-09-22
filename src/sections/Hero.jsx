@@ -34,14 +34,14 @@ export default function Hero() {
           </p>
 
           <h1 className="text-[44px] text-ink sm:text-[58px] lg:text-[68px] xl:text-[76px]">
-            Fresh nails.
+            Beautiful nails.
             <br />
-            <span className="text-gold-deep">Zero fuss.</span>
+            <span className="text-gold-deep">Done right.</span>
           </h1>
 
           <p className="max-w-[32rem] text-[18px] text-muted lg:text-[20px]">
-            Manicures, pedicures, custom nail art, waxing and lashes on Glades Road in Boca Raton. Book
-            online, or call anytime.
+            From manicures and pedicures to custom nail art, waxing and lashes, we&apos;ve got Boca
+            Raton covered. Book online, or call anytime.
           </p>
 
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-1">
