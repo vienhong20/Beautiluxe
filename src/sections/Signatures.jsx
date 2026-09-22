@@ -21,7 +21,7 @@ export default function Signatures() {
   return (
     <section id="signatures" className="section-pad overflow-hidden">
       <div className="container-x">
-        <Reveal as="div" className="mb-10 flex max-w-2xl flex-col gap-4 px-4 sm:px-6 lg:mb-14 lg:px-12">
+        <Reveal as="div" className="mb-10 flex flex-col items-center gap-4 px-4 text-center sm:px-6 lg:mb-14 lg:px-12">
           <h2 className="flex items-center gap-3 text-[32px] lg:text-[46px]">
             <CoralDrop className="h-7 w-5" />
             Our signatures

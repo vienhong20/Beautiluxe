@@ -175,16 +175,16 @@
 }
 
 .signature-showcase .slide[data-current] .slide--image {
-  filter: brightness(0.88) saturate(1.05);
+  filter: brightness(1.08) saturate(1.12) contrast(1.02);
 }
 
 .signature-showcase .slide:not([data-current]) .slide--image {
-  filter: brightness(0.5) saturate(0.9);
+  filter: brightness(0.7) saturate(1);
 }
 
 .signature-showcase .slide[data-next2] .slide--image,
 .signature-showcase .slide[data-previous2] .slide--image {
-  filter: brightness(0.3) saturate(0.75);
+  filter: brightness(0.5) saturate(0.9);
 }
 
 .signature-showcase .slide__inner {

@@ -3,6 +3,7 @@ import Button from '../components/core/Button.jsx';
 import CoralDrop from '../components/media/CoralDrop.jsx';
 import Reveal from '../components/motion/Reveal.jsx';
 import useOpenStatus from '../hooks/useOpenStatus.js';
+import mapLocation from '../assets/photos/map-location-1.webp';
 import { BUSINESS, BOOKING_URL, HAS_BOOKING, HOURS, formatTime } from '../data/business.js';
 
 // Display Monday-first, keep HOURS indexed Sunday-first for Date math.
@@ -12,8 +13,17 @@ export default function Visit() {
   const { dayIndex, label } = useOpenStatus();
 
   return (
-    <section id="visit" className="section-pad bg-seaglass">
-      <div className="container-x">
+    <section id="visit" className="section-pad relative overflow-hidden bg-seaglass">
+      <img
+        src={mapLocation}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full scale-110 object-cover object-[50%_30%] opacity-35 blur-sm"
+      />
+      <div className="absolute inset-0 bg-seaglass/55" aria-hidden="true" />
+      <div className="container-x relative">
         <Reveal className="mb-10 flex max-w-2xl flex-col gap-4 lg:mb-14">
           <h2 className="flex items-center gap-3 text-[32px] lg:text-[46px]">
             <CoralDrop className="h-7 w-5" />

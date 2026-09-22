@@ -24,6 +24,7 @@ npm run build    # outputs dist/
 | Google reviews (verbatim, with reviewer photos where we have one) | `src/data/reviews.js` + `src/assets/reviewers/` |
 | Gallery photos (Our Work carousel + reused by a few Signature cards) | `src/data/gallery.js` + `src/assets/photos/` |
 | Hero photos (auto-crossfading) | `data/gallery.js`'s `HERO_INTERIOR_PHOTOS` + `src/assets/photos/hero-salon-interior*.webp` |
+| Visit section map background | `src/assets/photos/map-location-1.webp` (a map screenshot centered on the salon, shown blurred + faded behind the Hours/Find-us cards) |
 | Colors, fonts, radius, sheen | `src/index.css` |
 | SEO meta + NailSalon JSON-LD | `index.html` |
 
