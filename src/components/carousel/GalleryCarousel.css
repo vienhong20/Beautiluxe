@@ -37,7 +37,7 @@
   overflow: hidden;
   cursor: pointer;
   isolation: isolate;
-  transition: flex-basis var(--transition), flex-grow var(--transition);
+  transition: flex-basis var(--transition), flex-grow var(--transition), opacity var(--transition);
 }
 
 .gallery-carousel__item[data-dist='1'] {
@@ -141,6 +141,57 @@
   .gallery-carousel__title,
   .gallery-carousel__subtitle {
     white-space: normal;
+  }
+
+  /* Narrow screens: only 4 slots ever occupy layout space (previous /
+     current / next / next2), instead of every other photo competing for
+     the same sliver of width. Combined with the scroll-into-view effect
+     in the component, the active photo is always fully on screen.
+
+     Widths snap instantly here (no flex-basis transition) — the "slide"
+     motion comes from the scroll animation alone. Transitioning both at
+     once meant the scroll target was computed mid-transition, landing on
+     a stale (pre-resize) position and cropping the active photo. */
+  .gallery-carousel {
+    --active-width: min(72vw, 320px);
+    --near-width: clamp(44px, 12vw, 64px);
+  }
+
+  .gallery-carousel__item {
+    transition: none;
+  }
+
+  .gallery-carousel__item[data-role='hidden'] {
+    /* display:none (not flex:0+opacity:0) so it also stops contributing
+       to the list's flex `gap` — otherwise 6+ zero-width hidden items
+       would still add 60px+ of dead space between the 4 visible ones. */
+    display: none;
+  }
+
+  /* DOM order is fixed and sequential (item0..item9); role is circular,
+     so right at the wrap (e.g. activeIndex 0, "previous" = the last
+     item) the previous-role item is the LAST child in the DOM, not
+     adjacent to "current". `order` puts the 4 visible slots back in
+     their logical left-to-right sequence regardless of DOM position —
+     scoped to this media query only, so desktop's filmstrip (which
+     reads left-to-right by real index, not by role) is untouched. */
+  .gallery-carousel__item[data-role='previous'] {
+    order: 0;
+    flex: 0 0 var(--near-width);
+  }
+
+  .gallery-carousel__item[data-role='current'] {
+    order: 1;
+  }
+
+  .gallery-carousel__item[data-role='next'] {
+    order: 2;
+    flex: 0 0 var(--near-width);
+  }
+
+  .gallery-carousel__item[data-role='next2'] {
+    order: 3;
+    flex: 0 0 clamp(28px, 8vw, 40px);
   }
 }
 

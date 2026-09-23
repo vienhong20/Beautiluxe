@@ -104,7 +104,6 @@ export default function ServiceMenu() {
                 ))}
               </motion.ul>
             </AnimatePresence>
-            <p className="mt-8 text-muted">Not sure what to pick? We&apos;ll help you choose.</p>
           </div>
         </div>
       </div>

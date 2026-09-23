@@ -1,7 +1,9 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import './SignatureShowcase.css';
 import useTilt from '../../hooks/useTilt.js';
+
+const AUTOPLAY_MS = 5000;
 
 // A 5-slot coverflow ring: previous2 / previous / current / next / next2.
 // Ported from a 3-item ("current/next/previous") reference design and
@@ -60,12 +62,35 @@ export default function SignatureShowcase({ items }) {
   const count = items.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef(null);
+  const paused = useRef(false);
   const reduce = useReducedMotion();
 
   const currentItem = items[currentIndex];
 
   const change = (direction) => {
     setCurrentIndex((prev) => (prev + direction + count) % count);
+  };
+
+  // Auto-advance, same pattern as the Gallery and Reviews carousels: paused
+  // (not stopped) while the visitor is hovering, touching, or has focused
+  // into the showcase via keyboard, and off entirely under
+  // prefers-reduced-motion. Purely a state change (setCurrentIndex) — never
+  // touches scroll position, so it can't drag the page around the way the
+  // Gallery's old scrollIntoView call once did.
+  useEffect(() => {
+    if (reduce) return undefined;
+    const id = setInterval(() => {
+      if (!paused.current) change(1);
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduce, count]);
+
+  const pause = () => {
+    paused.current = true;
+  };
+  const resume = () => {
+    paused.current = false;
   };
 
   // Five fixed slots (matches the current signature count exactly — see the
@@ -82,9 +107,11 @@ export default function SignatureShowcase({ items }) {
   useTilt(triggerRefs[4], [innerRefs[4], infoInnerRefs[4]]);
 
   const onTouchStart = (e) => {
+    pause();
     touchStartX.current = e.touches[0].clientX;
   };
   const onTouchEnd = (e) => {
+    resume();
     if (touchStartX.current == null) return;
     const delta = e.changedTouches[0].clientX - touchStartX.current;
     touchStartX.current = null;
@@ -94,7 +121,15 @@ export default function SignatureShowcase({ items }) {
 
   return (
     <div>
-      <div className="signature-showcase" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+      <div
+        className="signature-showcase"
+        onMouseEnter={pause}
+        onMouseLeave={resume}
+        onFocus={pause}
+        onBlur={resume}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="slider">
           <button type="button" className="slider--btn slider--btn__prev" onClick={() => change(-1)} aria-label="Previous signature">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
