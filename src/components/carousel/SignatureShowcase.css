@@ -129,7 +129,14 @@
   --slide-tx: 0px;
   --slide-rotY: 0deg;
   pointer-events: auto;
+  cursor: default;
   z-index: 50;
+}
+
+/* Peeking cards are genuinely clickable (jump to that signature) — give
+   them the affordance to match. */
+.signature-showcase .slide:not([data-current]) {
+  cursor: pointer;
 }
 
 .signature-showcase .slide[data-next],

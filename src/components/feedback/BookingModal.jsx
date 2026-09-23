@@ -54,7 +54,7 @@ export default function BookingModal({ isOpen, onClose }) {
               type="button"
               onClick={onClose}
               aria-label="Close"
-              className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-seaglass hover:text-jade"
+              className="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-seaglass hover:text-jade"
             >
               <X size={18} strokeWidth={1.75} aria-hidden="true" />
             </button>

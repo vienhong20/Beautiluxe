@@ -45,6 +45,10 @@
     @apply bg-foam font-sans text-ink antialiased;
     font-size: 17px;
     line-height: 1.6;
+    /* Safety net: several sections use transform-driven carousels (3D
+       coverflow, tilt) that could bleed past the viewport edge if a
+       future change forgets its own local overflow:hidden. */
+    overflow-x: hidden;
   }
   @media (min-width: 60rem) {
     body { font-size: 18px; }

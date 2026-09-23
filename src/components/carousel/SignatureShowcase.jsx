@@ -21,11 +21,20 @@ function roleFor(itemIndex, currentIndex, count) {
   return ROLE_BY_OFFSET[offset] ?? null;
 }
 
-function SlideSet({ index, role, item, innerRef, infoInnerRef, triggerRef }) {
+function SlideSet({ index, role, item, innerRef, infoInnerRef, triggerRef, onSelect }) {
   const dataAttr = role ? { [`data-${role}`]: '' } : {};
+  // The peeking previous/next/next2 cards had `cursor: pointer` (see the
+  // .css) with no click handler behind it — a false affordance. Current
+  // stays inert (nothing to select) so its cursor reverts to default via
+  // the [data-current] rule below.
   return (
     <>
-      <div className="slide" ref={triggerRef} {...dataAttr}>
+      <div
+        className="slide"
+        ref={triggerRef}
+        onClick={role === 'current' ? undefined : onSelect}
+        {...dataAttr}
+      >
         <div className="slide__inner" ref={innerRef}>
           <div className="slide--image__wrapper">
             <img
@@ -148,6 +157,7 @@ export default function SignatureShowcase({ items }) {
                   innerRef={innerRefs[i]}
                   infoInnerRef={infoInnerRefs[i]}
                   triggerRef={triggerRefs[i]}
+                  onSelect={() => setCurrentIndex(i)}
                 />
               ))}
             </div>
