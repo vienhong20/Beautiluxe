@@ -79,33 +79,33 @@ export default function Visit() {
               <Phone size={24} strokeWidth={1.5} className="shrink-0 text-jade" aria-hidden="true" />
               <span className="num !text-[19px] font-medium">{BUSINESS.phoneDisplay}</span>
             </a>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col gap-3">
               <a
                 href={BUSINESS.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center gap-2 font-medium text-jade hover:underline"
+                className="inline-flex min-h-12 items-center gap-3 font-medium text-jade hover:underline"
               >
-                <Instagram size={22} strokeWidth={1.5} aria-hidden="true" />
+                <Instagram size={22} strokeWidth={1.5} className="shrink-0" aria-hidden="true" />
                 {BUSINESS.instagram.handle}
               </a>
               <a
-                href={BUSINESS.facebook}
+                href={BUSINESS.facebook.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full text-jade hover:bg-seaglass"
-                aria-label="BeautiLuxe Nail Spa on Facebook"
+                className="inline-flex min-h-12 items-center gap-3 font-medium text-jade hover:underline"
               >
-                <Facebook size={22} strokeWidth={1.5} aria-hidden="true" />
+                <Facebook size={22} strokeWidth={1.5} className="shrink-0" aria-hidden="true" />
+                {BUSINESS.facebook.handle}
               </a>
               <a
                 href={BUSINESS.tiktok.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full text-jade hover:bg-seaglass"
-                aria-label="BeautiLuxe Nail Spa on TikTok"
+                className="inline-flex min-h-12 items-center gap-3 font-medium text-jade hover:underline"
               >
-                <TikTokIcon className="h-[22px] w-[22px]" />
+                <TikTokIcon className="h-[22px] w-[22px] shrink-0" />
+                {BUSINESS.tiktok.handle}
               </a>
             </div>
             <div className="mt-auto pt-2">

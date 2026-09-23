@@ -1,6 +1,7 @@
 import Header from './components/navigation/Header.jsx';
 import StickyBookBar from './components/navigation/StickyBookBar.jsx';
 import FloatingSocialBar from './components/navigation/FloatingSocialBar.jsx';
+import { BookingModalProvider } from './context/BookingModalContext.jsx';
 import Hero from './sections/Hero.jsx';
 import MarqueeStrip from './sections/MarqueeStrip.jsx';
 import TrustBar from './sections/TrustBar.jsx';
@@ -14,7 +15,7 @@ import Footer from './sections/Footer.jsx';
 
 export default function App() {
   return (
-    <>
+    <BookingModalProvider>
       <a
         href="#menu"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-jade focus:px-5 focus:py-3 focus:text-foam"
@@ -36,6 +37,6 @@ export default function App() {
       <Footer />
       <FloatingSocialBar />
       <StickyBookBar />
-    </>
+    </BookingModalProvider>
   );
 }

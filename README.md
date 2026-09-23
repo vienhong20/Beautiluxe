@@ -12,7 +12,7 @@ npm run build    # outputs dist/
 
 ## Before launch
 
-1. **Booking link** — every "Book Now" button reads `VITE_BOOKING_URL`. Add it in Vercel → Project → Settings → Environment Variables (or `.env.local` locally). Until it's set, buttons point to `#`.
+1. **Booking link** — every "Book Now" control (Header, Hero's button, Hero's rotating badge) reads `VITE_BOOKING_URL`. Add it in Vercel → Project → Settings → Environment Variables (or `.env.local` locally). Until it's set, they open the "online booking is almost here, call us" popup (`BookingModal`) instead of navigating anywhere — see `components/core/BookNowButton.jsx` and `context/BookingModalContext.jsx`.
 2. **Deploy** — import the repo in Vercel (framework preset: Vite). No other config needed.
 
 ## Where things live
@@ -35,7 +35,8 @@ npm run build    # outputs dist/
 - `components/carousel` — `SignatureShowcase` (5-slot 3D coverflow for the Signatures section — mouse-parallax tilt, contained cinematic blur backdrop, staggered badge/title/tagline reveal; the long description sits below the dark showcase in the page's own light theme, not overlaid on the photo. Hardcoded for exactly 5 signature services — see the file-level comment in `SignatureShowcase.jsx` before adding/removing one. See `SignatureShowcase.css`); `GalleryCarousel` (hover/tap-to-expand filmstrip for Our Work — every gallery photo stays on screen, width and color driven by each item's distance from the active one, gradient title/caption reveal on the active card, auto-advances every 3.2s. Works for any item count — see `GalleryCarousel.css`)
 - `sections/MarqueeStrip` — continuous auto-scrolling ribbon of the salon's real service categories (from `SERVICE_MENU`), directly under the Hero. Disabled under `prefers-reduced-motion` (see `.marquee-track` in `index.css`)
 - `components/carousel/HeroPhotoCarousel` — quiet auto-crossfade for the Hero photo (no manual controls, just a small dot indicator), 5s per slide, pauses on hover/focus, holds on the first photo under `prefers-reduced-motion`. Works for any number of photos in `HERO_INTERIOR_PHOTOS`
-- `components/feedback` — `RatingStars` (Foil Gold, dark surfaces only)
+- `components/feedback` — `RatingStars` (Foil Gold, dark surfaces only); `BookingModal` ("online booking is almost here, call us" popup — see Booking link above), driven by `context/BookingModalContext` (`BookingModalProvider` wraps the app in `App.jsx`, `useBookingModal()` exposes `open()`)
+- `components/core/BookNowButton` — drop-in for any "Book Now" control: a normal external-link `Button` once `VITE_BOOKING_URL` is set, otherwise a button that opens `BookingModal`
 - `components/navigation` — `Header`, `StickyBookBar` (mobile only — one inline row: Call Us + Instagram/Facebook/TikTok. No Book Now here by design; it's still in the Header and throughout the page), `FloatingSocialBar` (desktop-only, `lg:` up — a liquid-glass pill (Instagram, Facebook, TikTok, Call) fixed bottom-right, pulled well up from the bottom edge. See `FloatingSocialBar.css`)
 - `components/media/TikTokIcon` — the official TikTok mark (Simple Icons); lucide has no TikTok glyph
 - `hooks/useOpenStatus` — live "Open now / Opens at" in salon time (America/New_York)

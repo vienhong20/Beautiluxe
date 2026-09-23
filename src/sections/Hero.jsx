@@ -1,9 +1,10 @@
 import { ArrowRight, DoorOpen, Phone, Star } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
-import Button from '../components/core/Button.jsx';
+import BookNowButton from '../components/core/BookNowButton.jsx';
 import RotatingBadge from '../components/media/RotatingBadge.jsx';
 import HeroPhotoCarousel from '../components/carousel/HeroPhotoCarousel.jsx';
 import useOpenStatus from '../hooks/useOpenStatus.js';
+import { useBookingModal } from '../context/BookingModalContext.jsx';
 import { HERO_INTERIOR_PHOTOS } from '../data/gallery.js';
 import { BUSINESS, BOOKING_URL, HAS_BOOKING } from '../data/business.js';
 
@@ -15,6 +16,7 @@ const DOT_PATTERN = {
 export default function Hero() {
   const { isOpen, label } = useOpenStatus();
   const reduce = useReducedMotion();
+  const { open: openBookingModal } = useBookingModal();
 
   return (
     <section id="top" className="overflow-x-hidden px-4 pb-10 pt-8 sm:px-6 lg:px-12 lg:pb-16 lg:pt-14">
@@ -45,10 +47,10 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-1">
-            <Button href={BOOKING_URL} external={HAS_BOOKING} className="px-8">
+            <BookNowButton className="px-8">
               Book Now
               <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
-            </Button>
+            </BookNowButton>
             <a
               href={BUSINESS.phoneHref}
               className="num inline-flex items-center gap-2 font-medium text-jade underline decoration-jade/30 underline-offset-8 hover:decoration-jade"
@@ -83,7 +85,11 @@ export default function Hero() {
           />
 
           <div className="absolute -right-3 -top-5 sm:-right-5 sm:-top-7">
-            <RotatingBadge href={BOOKING_URL} external={HAS_BOOKING} />
+            <RotatingBadge
+              href={BOOKING_URL}
+              external={HAS_BOOKING}
+              onClick={HAS_BOOKING ? undefined : openBookingModal}
+            />
           </div>
 
           <div className="absolute -left-4 top-[20%] hidden items-center gap-3 rounded-2xl bg-foam py-3 pl-3 pr-4 shadow-[var(--shadow-ambient)] sm:flex">

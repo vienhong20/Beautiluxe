@@ -1,7 +1,7 @@
 import { Phone } from 'lucide-react';
-import Button from '../core/Button.jsx';
+import BookNowButton from '../core/BookNowButton.jsx';
 import logoFullJade from '../../assets/logos/logo-full-jade.webp';
-import { BUSINESS, BOOKING_URL, HAS_BOOKING } from '../../data/business.js';
+import { BUSINESS } from '../../data/business.js';
 
 const NAV = [
   { href: '#signatures', label: 'Signatures' },
@@ -49,9 +49,7 @@ export default function Header() {
           >
             <Phone size={19} strokeWidth={1.5} aria-hidden="true" />
           </a>
-          <Button href={BOOKING_URL} external={HAS_BOOKING} className="hidden sm:inline-flex">
-            Book Now
-          </Button>
+          <BookNowButton className="hidden sm:inline-flex" />
         </div>
       </div>
     </header>

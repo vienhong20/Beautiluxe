@@ -5,7 +5,7 @@ export const BUSINESS = {
   phoneDisplay: '561-465-5948',
   phoneHref: 'tel:5614655948',
   instagram: { handle: '@beautiluxenailspa', url: 'https://www.instagram.com/beautiluxenailspa/' },
-  facebook: 'https://www.facebook.com/people/Beautiluxe-nail-spa/100090760867621/',
+  facebook: { handle: 'Beautiluxe Nail Spa', url: 'https://www.facebook.com/people/Beautiluxe-nail-spa/100090760867621/' },
   tiktok: { handle: '@beautiluxenailspa', url: 'https://www.tiktok.com/@beautiluxenailspa' },
   mapsUrl:
     'https://www.google.com/maps/search/?api=1&query=BeautiLuxe%20Nail%20Spa&query_place_id=ChIJm6ZCcOIb2YgRlyuoNVAGzKE',

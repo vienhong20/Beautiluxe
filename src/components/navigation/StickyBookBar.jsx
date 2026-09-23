@@ -4,7 +4,7 @@ import { BUSINESS } from '../../data/business.js';
 
 const SOCIALS = [
   { key: 'instagram', href: BUSINESS.instagram.url, label: `${BUSINESS.name} on Instagram`, Icon: Instagram },
-  { key: 'facebook', href: BUSINESS.facebook, label: `${BUSINESS.name} on Facebook`, Icon: Facebook },
+  { key: 'facebook', href: BUSINESS.facebook.url, label: `${BUSINESS.name} on Facebook`, Icon: Facebook },
   { key: 'tiktok', href: BUSINESS.tiktok.url, label: `${BUSINESS.name} on TikTok`, Icon: TikTokIcon },
 ];
 

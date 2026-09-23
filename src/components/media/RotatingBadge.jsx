@@ -4,14 +4,17 @@ import { useReducedMotion } from 'motion/react';
 // A slow-spinning circular "BOOK NOW" stamp, echoing the logo's own circular
 // mark. Text rides an SVG circle path so it stays legible at any rotation;
 // the whole badge spins via CSS animation, paused under reduced motion.
-export default function RotatingBadge({ href, external, className = '' }) {
+export default function RotatingBadge({ href, external, onClick, className = '' }) {
   const reduce = useReducedMotion();
   const id = 'rotating-badge-path';
+  const Tag = onClick ? 'button' : 'a';
 
   return (
-    <a
-      href={href}
-      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    <Tag
+      type={onClick ? 'button' : undefined}
+      href={onClick ? undefined : href}
+      onClick={onClick}
+      {...(!onClick && external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       aria-label="Book an appointment"
       className={`group relative inline-flex h-[104px] w-[104px] items-center justify-center rounded-full bg-foam shadow-[var(--shadow-ambient)] ${className}`}
     >
@@ -32,6 +35,6 @@ export default function RotatingBadge({ href, external, className = '' }) {
       <span className="absolute inline-flex h-8 w-8 items-center justify-center rounded-full bg-jade text-foam transition-transform group-hover:scale-110">
         <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
       </span>
-    </a>
+    </Tag>
   );
 }
