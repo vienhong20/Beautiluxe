@@ -88,28 +88,28 @@ export const SERVICE_MENU = [
 
 export const SIGNATURES = [
   {
-    title: 'Custom Nail Design',
-    tagline: 'Bring the inspo.',
-    body: 'Show us a photo, or pick a color and let the artist choose. Hand-painted details, chrome, gems and 3D art.',
+    title: 'Pedicure',
+    tagline: 'Feet, fully pampered.',
+    body: 'Soak, scrub, massage and polish. Choose a spa, deluxe or hot stone pedicure, finished in regular or gel color.',
   },
   {
-    title: 'BeautiLuxe Pedicure',
-    tagline: 'Our namesake pedicure.',
-    body: 'The pedicure we put our name on. Ask for it by name when you book.',
+    title: 'Dipping Powder',
+    tagline: 'Color that lasts.',
+    body: 'Pigmented powder layered over a bonding base for a strong, chip-resistant finish that wears for weeks. Try it in ombre or French.',
   },
   {
-    title: 'Milk & Honey Paraffin',
-    tagline: 'Soft, smooth skin.',
-    body: 'A warm paraffin treatment with milk and honey. Add it to your pedicure.',
+    title: 'Builder Gel',
+    tagline: 'Strength, naturally.',
+    body: 'A thicker gel brushed over your own nails to add strength and a smooth, even shape. A great choice for growing out natural nails.',
   },
   {
-    title: 'Eyelash Extensions',
-    tagline: 'Wide eyed, all day.',
-    body: 'Classic or hybrid lash sets, applied by our lash artists. Ask about the lash lift too.',
+    title: 'Gel X',
+    tagline: 'Instant length.',
+    body: 'Soft gel extensions applied as full-cover tips for length and shape in one visit. Lightweight, and gentle on your natural nails.',
   },
   {
-    title: 'Ombre Full Set',
-    tagline: 'Fade it out.',
-    body: 'A smooth color gradient from base to tip, done in acrylic or dip. Endless color combinations.',
+    title: 'Tap Gel',
+    tagline: 'Light but lasting.',
+    body: 'A hybrid gel as durable as acrylic but lighter and more comfortable to wear. A good fit if acrylic feels too heavy or your nails are sensitive to it.',
   },
 ];

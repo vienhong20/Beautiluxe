@@ -7,7 +7,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="on-dark bg-ink px-4 py-5 pb-24 text-center text-[12px] leading-relaxed text-foam/70 sm:px-6 lg:px-12 lg:pb-5">
-      © {year} {BUSINESS.name}.
+      ©{year} {BUSINESS.name}.
       <br />
       Powered by EezyMarketing.
     </footer>

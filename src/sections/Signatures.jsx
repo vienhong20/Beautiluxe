@@ -2,17 +2,20 @@ import CoralDrop from '../components/media/CoralDrop.jsx';
 import Reveal from '../components/motion/Reveal.jsx';
 import SignatureShowcase from '../components/carousel/SignatureShowcase.jsx';
 import { SIGNATURES } from '../data/services.js';
-import { GALLERY } from '../data/gallery.js';
+import pedicure from '../assets/photos/signature-pedicure.webp';
+import dippingPowder from '../assets/photos/signature-dipping-powder.webp';
+import builderGel from '../assets/photos/signature-builder-gel.webp';
+import gelX from '../assets/photos/signature-gel-x.webp';
+import tapGel from '../assets/photos/signature-tap-gel.webp';
 
-// No dedicated photography exists per named service yet (pedicure / paraffin /
-// lash / ombre close-ups), so each signature borrows a real client photo that
-// matches its mood from the salon's own gallery rather than a literal 1:1 shot.
+// Stock photos (Unsplash License, free for commercial use) stand in until the
+// salon has its own shot of each service. Swap the file, keep the filename.
 const PHOTO_BY_TITLE = {
-  'Custom Nail Design': GALLERY.find((p) => p.alt.includes('Gold chrome almond tips')),
-  'BeautiLuxe Pedicure': GALLERY.find((p) => p.alt.includes('silver glitter fade')),
-  'Milk & Honey Paraffin': GALLERY.find((p) => p.alt.includes('olive, orange and mustard')),
-  'Eyelash Extensions': GALLERY.find((p) => p.alt.includes('red and black florals')),
-  'Ombre Full Set': GALLERY.find((p) => p.alt.includes('Pink ombre almond nails')),
+  Pedicure: { src: pedicure, alt: 'Freshly polished red pedicure toes' },
+  'Dipping Powder': { src: dippingPowder, alt: 'Pink glitter dip powder nails' },
+  'Builder Gel': { src: builderGel, alt: 'Natural nude builder gel manicure' },
+  'Gel X': { src: gelX, alt: 'Long almond Gel X extensions in cobalt blue with glitter tips' },
+  'Tap Gel': { src: tapGel, alt: 'Soft pink and white French tap gel nails' },
 };
 
 const slides = SIGNATURES.map((item) => ({ ...item, photo: PHOTO_BY_TITLE[item.title] }));
